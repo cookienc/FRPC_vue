@@ -26,7 +26,11 @@
             <v-list-item-title>BarGraph</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item router :to="{ name: 'lineGraph' }" exact>
+        <v-list-item
+          router
+          :to="{ name: 'lineGraph', query: { date: this.getDate() } }"
+          exact
+        >
           <v-list-item-action>
             <i class="fas fa-lineGraph"></i>
           </v-list-item-action>
@@ -60,7 +64,14 @@
 
 <script>
 export default {
-  data: () => ({ drawer: null }),
+  data: () => ({
+    drawer: null,
+  }),
+
+  created() {
+    this.getDate();
+  },
+
   methods: {
     test() {
       alert("클릭됨");
@@ -78,6 +89,8 @@ export default {
       var minutes = ("0" + today.getMinutes()).slice(-2);
       var seconds = ("0" + today.getSeconds()).slice(-2);
       var timeString = dateString + " " + hours + ":" + minutes + ":" + seconds;
+      today = timeString;
+      console.log(timeString);
       return timeString;
     },
   },

@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <GChart type="LineChart" :data="getPressures()" :options="chartOptions" />
+    <h1>최근 5일 동안 압력 측정 현황</h1>
+    <GChart
+      id="chart"
+      type="LineChart"
+      :data="getPressures()"
+      :options="chartOptions"
+    />
   </div>
 </template>
 
@@ -19,9 +25,14 @@ export default {
       pressures: [],
 
       chartOptions: {
-        chart: {
-          title: "Company Performance",
-          subtitle: "Sales, Expenses, and Profit: 2014-2017",
+        hAxis: {
+          title: "손가락",
+          titleTextStyle: { color: "#333" },
+        },
+        vAxis: {
+          title: "압력",
+          minValue: 10,
+          ticks: [10, 15, 20, 25, 30],
         },
       },
     };
@@ -70,3 +81,13 @@ export default {
   },
 };
 </script>
+
+<style>
+h1 {
+  margin-top: 50px;
+}
+
+#chart {
+  height: 700px;
+}
+</style>
